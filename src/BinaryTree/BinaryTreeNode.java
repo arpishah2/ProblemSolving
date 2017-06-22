@@ -67,11 +67,31 @@ public class BinaryTreeNode {
 	
 	public static void preOrder(BinaryTreeNode node){
 		if(node!=null){
-			System.out.println(node.data);
+			System.out.print(node.data+" ");
 			preOrder(node.left);
 			preOrder(node.right);
 		}else{
-			System.out.println("null");
+			System.out.print("null ");
+		}
+	}
+	
+	public static void inOrder(BinaryTreeNode node){
+		if(node!=null){
+			inOrder(node.left);
+			System.out.print(node.data+" ");
+			inOrder(node.right);
+		}else{
+			System.out.print("null ");
+		}
+	}
+	
+	public static void postOrder(BinaryTreeNode node){
+		if(node!=null){
+			postOrder(node.left);
+			postOrder(node.right);
+			System.out.print(node.data+" ");
+		}else{
+			System.out.print("null ");
 		}
 	}
 	
@@ -79,7 +99,12 @@ public class BinaryTreeNode {
 		// TODO Auto-generated method stub
 
 		BinaryTreeNode node = createRandomBinaryTree();
+		System.out.println("\nPreorder: ");
 		preOrder(node);
+		System.out.println("\n\nInorder: ");
+		inOrder(node);
+		System.out.println("\n\nPostorder: ");
+		postOrder(node);
 		
 	}
 
