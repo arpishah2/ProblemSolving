@@ -15,24 +15,38 @@ public class BinarySearchTreeNode {
 		this.left=left;
 		this.right=right;
 	}
+
 	
 	
-	public static BinarySearchTreeNode searchBST(BinarySearchTreeNode root, int key){
+	
+	public static BinarySearchTreeNode searchBST(BinarySearchTreeNode root, int key) {
+									 //searchBST(50,60)	
+									      //searchBST(70,60)
+												//searchBST(60,60)
 		
-		if(root==null){
+		if (root == null) { // 1   
 			return null;
 		}
-		else if(root.data == key){
+
+		else if (root.data == key) { // 2
 			return root;
 		}
-		else if (root.data<key){
-			return searchBST(root.right, key);
-		}
+
 		else {
-			return searchBST(root.left,key);
+			if (key < root.data) { // 3
+				BinarySearchTreeNode search = searchBST(root.left, key);
+				 							 //search = searchBST(60,60) = 60
+				return search;
+			} else { // 4
+				
+				BinarySearchTreeNode search = searchBST(root.right, key); 
+				  							//search = searchBST(70,60) = 60;
+				return search;
+			
+			}
 		}
+
 	}
-	
 	
 	public static BinarySearchTreeNode createRandomBinarySearchTree(){
 		BinarySearchTreeNode left4 = new BinarySearchTreeNode(5, null, null);
@@ -54,9 +68,9 @@ public class BinarySearchTreeNode {
 		// TODO Auto-generated method stub
 
 		BinarySearchTreeNode root = createRandomBinarySearchTree();
-		System.out.println(root.left.data);
-		BinarySearchTreeNode search = searchBST(root,60);
-		System.out.println(search.data);
+		//System.out.println(root.left.data);
+		BinarySearchTreeNode search = searchBST(root,60); //search = searchBST(50,60) = 60
+		System.out.println(search.data); //60
 		
 	}
 	
