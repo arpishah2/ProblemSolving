@@ -8,6 +8,11 @@ public class BinarySearchTreeNode {
 	BinarySearchTreeNode left;
 	BinarySearchTreeNode right;
 	
+	BinarySearchTreeNode(int data){
+		this.data=data;
+		this.left=null;
+		this.right=null;
+	}
 	
 	BinarySearchTreeNode(int data, BinarySearchTreeNode left, BinarySearchTreeNode right) {
 		// TODO Auto-generated constructor stub
@@ -20,32 +25,70 @@ public class BinarySearchTreeNode {
 	
 	
 	public static BinarySearchTreeNode searchBST(BinarySearchTreeNode root, int key) {
-									 //searchBST(50,60)	
-									      //searchBST(70,60)
-												//searchBST(60,60)
 		
-		if (root == null) { // 1   
+		if (root == null) { 
 			return null;
 		}
-
-		else if (root.data == key) { // 2
+		else if (root.data == key) { 
 			return root;
 		}
 
 		else {
-			if (key < root.data) { // 3
+			if (key < root.data) { 
 				BinarySearchTreeNode search = searchBST(root.left, key);
-				 							 //search = searchBST(60,60) = 60
 				return search;
-			} else { // 4
-				
+			} else { 
 				BinarySearchTreeNode search = searchBST(root.right, key); 
-				  							//search = searchBST(70,60) = 60;
 				return search;
-			
 			}
 		}
-
+	}
+	
+	
+	//recursion
+	public static BinarySearchTreeNode insertBST(BinarySearchTreeNode root,int key){
+		
+		BinarySearchTreeNode temp = new BinarySearchTreeNode(key);
+		
+		if(root==null){
+			root=temp;
+		}
+		else if(root.data>=temp.data){
+			root.left=insertBST(root.left,key);
+		}
+		else{
+			root.right=insertBST(root.right,key);
+		}
+		return root;
+	}
+	
+	public static BinarySearchTreeNode insertBSTIteration(BinarySearchTreeNode root,int key){
+		
+		BinarySearchTreeNode newNode = new BinarySearchTreeNode(key);
+		BinarySearchTreeNode parent = root;
+		BinarySearchTreeNode temp = root;
+		
+		
+		if(root==null){
+			root=newNode;
+		}
+		
+		while(temp!=null){
+			parent = temp;
+			if(newNode.data <= temp.data){
+				temp = temp.left;
+			}else{
+				temp = temp.right;
+			}
+		}
+		
+		if(newNode.data <= parent.data)
+			parent.left = newNode;
+		else
+			parent.right = newNode;
+		
+		
+		return root;
 	}
 	
 	public static BinarySearchTreeNode createRandomBinarySearchTree(){
@@ -64,14 +107,41 @@ public class BinarySearchTreeNode {
 		return root;
 	}
 	
+	public static void printBST(BinarySearchTreeNode root, int count){
+		if(root == null){
+			for(int i=0; i< count; i++){
+				System.out.print("\t");
+			}
+			System.out.println("null");
+		}	
+		else{
+			
+			for(int i=0; i< count; i++){
+				System.out.print("\t");
+			}
+			System.out.println(root.data);
+			
+			int temp = count+1;
+			printBST(root.left,temp);
+			printBST(root.right,temp);	
+		}
+	}//end of printBST()
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		BinarySearchTreeNode root = createRandomBinarySearchTree();
 		//System.out.println(root.left.data);
 		BinarySearchTreeNode search = searchBST(root,60); //search = searchBST(50,60) = 60
-		System.out.println(search.data); //60
+		System.out.println("Searched element is: "+search.data); //60
 		
+		BinarySearchTreeNode newTree = insertBST(root,200);
+		System.out.println("After inserting 200: \n\n");
+		printBST(newTree,0);
+		
+		BinarySearchTreeNode newTreeInsert = insertBSTIteration(root,65); 
+		System.out.println("After inserting 65: \n\n");
+		printBST(newTreeInsert,0);
 	}
 	
 	
