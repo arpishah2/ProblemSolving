@@ -64,6 +64,18 @@ public class BinaryTreeNode {
 		return root;
 	}
 		
+	public static boolean sameBinaryTree(BinaryTreeNode node1, BinaryTreeNode node2){
+		
+		if(node1 == null && node2 == null)
+			return true;
+		else if(node1 == null || node2 ==null)
+			return false;
+			
+		return node1.data == node2.data 
+				&& sameBinaryTree(node1.left,node2.left) 
+				&& sameBinaryTree(node1.right,node2.right);
+		
+	}
 	
 	public static void preOrder(BinaryTreeNode node){
 		if(node!=null){
@@ -105,6 +117,13 @@ public class BinaryTreeNode {
 		inOrder(node);
 		System.out.println("\n\nPostorder: ");
 		postOrder(node);
+		
+		System.out.println("\n\nCheck if two tree are same binary trees: ");
+		BinaryTreeNode tree1 = createRandomBinaryTree();
+		BinaryTreeNode tree2 = createRandomBinaryTree();
+		tree2.left.left.data = "0";
+		System.out.println(sameBinaryTree(tree1,tree2));
+		
 		
 	}
 
