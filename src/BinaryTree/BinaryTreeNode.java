@@ -77,6 +77,20 @@ public class BinaryTreeNode {
 		
 	}
 	
+	public static int sizeOfTree(BinaryTreeNode root){
+		if(root == null){
+			return 0;
+		}
+		return 1+sizeOfTree(root.left)+sizeOfTree(root.right);
+	}
+	
+	public static int heightOfTree(BinaryTreeNode root){
+		if(root == null){
+			return 0;
+		}
+		return 1+Math.max(heightOfTree(root.left),heightOfTree(root.right));
+	}
+	
 	public static void preOrder(BinaryTreeNode node){
 		if(node!=null){
 			System.out.print(node.data+" ");
@@ -118,12 +132,14 @@ public class BinaryTreeNode {
 		System.out.println("\n\nPostorder: ");
 		postOrder(node);
 		
+		System.out.println("\n\nHeight of tree:"+heightOfTree(node));
+		System.out.println("\n\nSize of tree:"+sizeOfTree(node));
+		
 		System.out.println("\n\nCheck if two tree are same binary trees: ");
 		BinaryTreeNode tree1 = createRandomBinaryTree();
 		BinaryTreeNode tree2 = createRandomBinaryTree();
 		tree2.left.left.data = "0";
 		System.out.println(sameBinaryTree(tree1,tree2));
-		
 		
 	}
 
