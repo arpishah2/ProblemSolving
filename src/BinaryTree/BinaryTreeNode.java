@@ -77,6 +77,7 @@ public class BinaryTreeNode {
 		
 	}
 	
+	
 	public static int sizeOfTree(BinaryTreeNode root){
 		if(root == null){
 			return 0;
@@ -121,6 +122,33 @@ public class BinaryTreeNode {
 		}
 	}
 	
+	//Check and print the branch that sums upto a value 'sum'
+	public static boolean rootToLeftSumBT(BinaryTreeNode root, int sum){
+		
+		if(root==null)
+			return false;
+		
+		int data = Integer.parseInt(root.data); //string value to int 
+		
+		if(root.left==null && root.right==null){ //leaf node 
+			if(data == sum){
+				System.out.println(root.data);
+				return true;
+			}
+			return false;
+		}
+		
+		boolean left = rootToLeftSumBT(root.left,sum-data);
+		boolean right = rootToLeftSumBT(root.right,sum-data);
+		
+		if(left||right){
+			System.out.println(root.data);	
+			return true;
+		}
+		return false;	
+	}
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -140,6 +168,10 @@ public class BinaryTreeNode {
 		BinaryTreeNode tree2 = createRandomBinaryTree();
 		tree2.left.left.data = "0";
 		System.out.println(sameBinaryTree(tree1,tree2));
+		
+		System.out.println("\n\nRoot to leaf sum BT=40?: ");
+		System.out.println(rootToLeftSumBT(node,50));
+		
 		
 	}
 
