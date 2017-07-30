@@ -149,6 +149,22 @@ public class BinaryTreeNode {
 	}
 	
 	
+	//check if binary tree is binary search tree
+	public static boolean isBST(BinaryTreeNode root, int min, int max){
+		
+		if(root == null)
+			return true;
+		
+		int data = Integer.valueOf(root.data);
+		
+		if(data<= min || data>max){
+			return false;
+		}
+		
+		return isBST(root.left,min, data) && isBST(root.right, data, max);
+		
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -172,7 +188,7 @@ public class BinaryTreeNode {
 		System.out.println("\n\nRoot to leaf sum BT=40?: ");
 		System.out.println(rootToLeftSumBT(node,50));
 		
-		
+		System.out.println("\n\nIS BT a BST?: "+isBST(node,Integer.MIN_VALUE, Integer.MAX_VALUE));
 	}
 
 }

@@ -91,6 +91,22 @@ public class BinarySearchTreeNode {
 		return root;
 	}
 	
+	
+	//check if binary tree is binary search tree
+	public static boolean isBST(BinarySearchTreeNode root, int min, int max){
+		
+		if(root == null)
+			return true;
+		
+		int data = Integer.valueOf(root.data);
+		
+		if(data<= min || data>max){
+			return false;
+		}
+		
+		return isBST(root.left,min, data) && isBST(root.right, data, max);
+		
+	}
 	public static BinarySearchTreeNode createRandomBinarySearchTree(){
 		BinarySearchTreeNode left4 = new BinarySearchTreeNode(5, null, null);
 		
@@ -142,6 +158,9 @@ public class BinarySearchTreeNode {
 		BinarySearchTreeNode newTreeInsert = insertBSTIteration(root,65); 
 		System.out.println("After inserting 65: \n\n");
 		printBST(newTreeInsert,0);
+		
+		System.out.println("\n\nIS BT a BST?: "
+				+isBST(root,Integer.MIN_VALUE, Integer.MAX_VALUE));
 	}
 	
 	
