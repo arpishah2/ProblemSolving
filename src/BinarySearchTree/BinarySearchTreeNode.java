@@ -1,5 +1,8 @@
 package BinarySearchTree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import BinaryTree.BinaryTreeNode;
 
 public class BinarySearchTreeNode {
@@ -107,6 +110,38 @@ public class BinarySearchTreeNode {
 		return isBST(root.left,min, data) && isBST(root.right, data, max);
 		
 	}
+	
+	
+	public static void levelOrderTraversal(BinarySearchTreeNode root){
+		 Queue<BinarySearchTreeNode> q = new LinkedList<BinarySearchTreeNode>();
+		 
+		 if(root !=null){
+			 q.add(root);
+			 System.out.println(root.data); 
+		 }
+		 
+		 while(!q.isEmpty()){
+			
+			 root =  q.peek();
+			 System.out.println(root.data);
+			 
+			 //add its child to the queue
+			 if(root.left!=null)
+				 q.add(root.left);
+			 if(root.right!=null)
+				 q.add(root.right);
+			 
+			 //remove element from queue
+			 q.remove();
+						 
+		 }
+
+	}
+	
+	
+	//inorder
+	
+	//preorder traversal
 	public static BinarySearchTreeNode createRandomBinarySearchTree(){
 		BinarySearchTreeNode left4 = new BinarySearchTreeNode(5, null, null);
 		
@@ -161,6 +196,10 @@ public class BinarySearchTreeNode {
 		
 		System.out.println("\n\nIS BT a BST?: "
 				+isBST(root,Integer.MIN_VALUE, Integer.MAX_VALUE));
+		
+		printBST(root,0);
+		System.out.println("Level order traversal");
+		levelOrderTraversal(root);
 	}
 	
 	
