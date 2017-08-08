@@ -117,13 +117,12 @@ public class BinarySearchTreeNode {
 		 
 		 if(root !=null){
 			 q.add(root);
-			 System.out.println(root.data); 
 		 }
 		 
 		 while(!q.isEmpty()){
 			
 			 root =  q.peek();
-			 System.out.println(root.data);
+			 System.out.print(root.data+" ");
 			 
 			 //add its child to the queue
 			 if(root.left!=null)
@@ -139,9 +138,37 @@ public class BinarySearchTreeNode {
 	}
 	
 	
-	//inorder
+	//in order traversal
+	public static void inOrderTraversal(BinarySearchTreeNode root){
+		if(root==null){
+			return;
+		}
+		inOrderTraversal(root.left);
+		System.out.print(root.data+" ");
+		inOrderTraversal(root.right);
+	}
 	
-	//preorder traversal
+	
+	//pre order traversal
+	public static void preOrderTraversal(BinarySearchTreeNode root){
+		if(root==null){
+			return;
+		}
+		System.out.print(root.data+" ");
+		preOrderTraversal(root.left);
+		preOrderTraversal(root.right);
+	}
+	
+	//post order traversal
+	public static void postOrderTraversal(BinarySearchTreeNode root){
+		if(root==null){
+			return;
+		}
+		postOrderTraversal(root.left);
+		postOrderTraversal(root.right);
+		System.out.print(root.data+" ");
+	}
+	
 	public static BinarySearchTreeNode createRandomBinarySearchTree(){
 		BinarySearchTreeNode left4 = new BinarySearchTreeNode(5, null, null);
 		
@@ -200,6 +227,15 @@ public class BinarySearchTreeNode {
 		printBST(root,0);
 		System.out.println("Level order traversal");
 		levelOrderTraversal(root);
+		
+		System.out.println("\n\nIn order traversal");
+		inOrderTraversal(root);
+		
+		System.out.println("\n\nPre order traversal");
+		preOrderTraversal(root);
+		
+		System.out.println("\n\nPost order traversal");
+		postOrderTraversal(root);
 	}
 	
 	
