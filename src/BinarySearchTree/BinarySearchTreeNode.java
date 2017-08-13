@@ -2,6 +2,7 @@ package BinarySearchTree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 import BinaryTree.BinaryTreeNode;
 
@@ -24,8 +25,6 @@ public class BinarySearchTreeNode {
 		this.right=right;
 	}
 
-	
-	
 	
 	public static BinarySearchTreeNode searchBST(BinarySearchTreeNode root, int key) {
 		
@@ -138,7 +137,7 @@ public class BinarySearchTreeNode {
 	}
 	
 	
-	//in order traversal
+	//recursive - in order traversal
 	public static void inOrderTraversal(BinarySearchTreeNode root){
 		if(root==null){
 			return;
@@ -149,7 +148,7 @@ public class BinarySearchTreeNode {
 	}
 	
 	
-	//pre order traversal
+	//recursive - pre order traversal
 	public static void preOrderTraversal(BinarySearchTreeNode root){
 		if(root==null){
 			return;
@@ -159,7 +158,7 @@ public class BinarySearchTreeNode {
 		preOrderTraversal(root.right);
 	}
 	
-	//post order traversal
+	//recursive - post order traversal
 	public static void postOrderTraversal(BinarySearchTreeNode root){
 		if(root==null){
 			return;
@@ -168,6 +167,33 @@ public class BinarySearchTreeNode {
 		postOrderTraversal(root.right);
 		System.out.print(root.data+" ");
 	}
+	
+	//iterative - post order traversal
+	public static void iterativePostOrderTraversal(BinarySearchTreeNode root){
+		if(root==null){
+			return;
+		}
+		Stack<BinarySearchTreeNode> st1 = new Stack<BinarySearchTreeNode>();
+		Stack<BinarySearchTreeNode> st2 = new Stack<BinarySearchTreeNode>();
+		st1.push(root);
+		
+		while(!st1.isEmpty()){
+			root = st1.pop(); //pop from stack1
+			st2.push(root); //store in stack2
+			//add children of root to stack1
+			if(root.left!=null)
+				st1.push(root.left);
+			if(root.right!=null)
+				st1.push(root.right);	
+		}
+		//print post order traversal
+		while(!st2.isEmpty()){
+			root = st2.pop();
+			System.out.print(root.data+" ");
+		}
+		
+	}
+	
 	
 	public static BinarySearchTreeNode createRandomBinarySearchTree(){
 		BinarySearchTreeNode left4 = new BinarySearchTreeNode(5, null, null);
@@ -228,14 +254,17 @@ public class BinarySearchTreeNode {
 		System.out.println("Level order traversal");
 		levelOrderTraversal(root);
 		
-		System.out.println("\n\nIn order traversal");
+		System.out.println("\n\nRecursive - In order traversal");
 		inOrderTraversal(root);
 		
-		System.out.println("\n\nPre order traversal");
+		System.out.println("\n\nRecursive - Pre order traversal");
 		preOrderTraversal(root);
 		
-		System.out.println("\n\nPost order traversal");
+		System.out.println("\n\nRecursive - Post order traversal");
 		postOrderTraversal(root);
+		
+		System.out.println("\n\nIterative - Post order traversal");
+		iterativePostOrderTraversal(root);
 	}
 	
 	
