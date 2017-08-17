@@ -194,6 +194,27 @@ public class BinarySearchTreeNode {
 		
 	}
 	
+	//iterative - pre order traversal
+	public static void iterativePreOrderTraversal(BinarySearchTreeNode root){
+		if(root==null){
+			return;
+		}
+		Stack<BinarySearchTreeNode> st1 = new Stack<BinarySearchTreeNode>();
+		st1.push(root);
+		System.out.println("\n\n");
+		
+		while(!st1.isEmpty()){
+			root = st1.pop(); //pop from stack1
+			System.out.print(root.data+" ");
+	
+			//add children of root to stack1
+			if(root.right!=null)
+				st1.push(root.right);
+			if(root.left!=null)
+				st1.push(root.left);		
+		}
+	}
+	
 	
 	public static BinarySearchTreeNode createRandomBinarySearchTree(){
 		BinarySearchTreeNode left4 = new BinarySearchTreeNode(5, null, null);
@@ -265,6 +286,9 @@ public class BinarySearchTreeNode {
 		
 		System.out.println("\n\nIterative - Post order traversal");
 		iterativePostOrderTraversal(root);
+		
+		System.out.println("\n\nIterative - Pre order traversal");
+		iterativePreOrderTraversal(root);
 	}
 	
 	
