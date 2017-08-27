@@ -111,6 +111,63 @@ public class BinarySearchTreeNode {
 	}
 	
 	
+	/*
+	 * Level by level printing of Binary Tree
+	 * Eg. 1
+	 *   2   3
+	 * 4  5 
+	 * will be printed as
+	 * 1
+	 * 2 3
+	 * 4 5
+	 * Null as delimiter between different elements
+	 */
+	
+	public static void levelOrderPrinting(BinarySearchTreeNode root){
+		//create queue
+		Queue<BinarySearchTreeNode> q = new LinkedList<BinarySearchTreeNode>();
+		
+		if(root == null){
+			System.out.println("Traversal cannot be done! Tree is empty");
+			return;
+		}
+		
+		//Add first element to Q
+		q.add(root);
+		q.add(null);
+		
+		while(!q.isEmpty()){
+			
+			BinarySearchTreeNode node = q.peek();
+			q.remove();
+			
+			if(node == null && !q.isEmpty()){
+				q.add(null); //delimiter
+				System.out.println("");
+			}
+			else if(node != null && !q.isEmpty()){
+				System.out.print(node.data+ " ");
+				//check left and right
+				if(node.left != null)
+					q.add(node.left);
+				if(node.right!=null)
+					q.add(node.right);
+			}
+			
+				
+			
+		}
+	}
+	
+	/*
+	 * Level by level printing of Binary Tree
+	 * Eg. 1
+	 *   2   3
+	 * 4  5 
+	 * will be printed as
+	 * 1 2 3 4 5
+	 */
+	
 	public static void levelOrderTraversal(BinarySearchTreeNode root){
 		 Queue<BinarySearchTreeNode> q = new LinkedList<BinarySearchTreeNode>();
 		 
@@ -215,6 +272,32 @@ public class BinarySearchTreeNode {
 		}
 	}
 	
+	//iterative - in order traversal
+	public static void iterativeInOrderTraversal(BinarySearchTreeNode root){
+		if(root==null){
+			return;
+		}
+		Stack<BinarySearchTreeNode> st1 = new Stack<BinarySearchTreeNode>();
+		st1.push(root);
+		System.out.println("\n\n");
+		
+		while(!st1.isEmpty()){
+			
+			if(root.left != null){
+				root = root.left;
+				st1.push(root.left);
+			}
+			else if(root.right != null){
+				root = root.right;
+				st1.push(root.right);
+			}
+			else{
+				BinarySearchTreeNode poppedElement = st1.pop();
+				System.out.print(poppedElement.data+" ");
+				root = st1.peek();
+			}	
+		}
+	}
 	
 	public static BinarySearchTreeNode createRandomBinarySearchTree(){
 		BinarySearchTreeNode left4 = new BinarySearchTreeNode(5, null, null);
@@ -275,6 +358,9 @@ public class BinarySearchTreeNode {
 		System.out.println("Level order traversal");
 		levelOrderTraversal(root);
 		
+		System.out.println("Level order printing of BST");
+		levelOrderPrinting(root);
+		
 		System.out.println("\n\nRecursive - In order traversal");
 		inOrderTraversal(root);
 		
@@ -289,6 +375,9 @@ public class BinarySearchTreeNode {
 		
 		System.out.println("\n\nIterative - Pre order traversal");
 		iterativePreOrderTraversal(root);
+		
+		System.out.println("\n\nIterative - In order traversal");
+		iterativeInOrderTraversal(root);
 	}
 	
 	
