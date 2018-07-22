@@ -21,7 +21,6 @@ public class UniqueNosInSortedArray {
 	}
 	
 	public static void main(String[] args) {
-		
 		UniqueNosInSortedArray uni = new UniqueNosInSortedArray();
 		int[] arr = new int[]{ 1,1,1,1,2,2,2,2,2,3,3,3,3,4,8,8,9,9,11,13,15 };
 		ArrayList<Integer> result = new ArrayList<Integer>();
