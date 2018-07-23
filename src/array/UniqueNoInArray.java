@@ -4,6 +4,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+
+
+/*
+ * 
+ * Finding unique numbers from sorted array in less than O(n)
+ * 
+ * Divide and conquer:
+ * look at the first and last element of a sorted sequence (the initial sequence is data[0]..data[data.length-1]).
+ * If both are equal, the only element in the sequence is the first (no matter how long the sequence is).
+ * If the are different, divide the sequence and repeat for each subsequence.
+ * Solves in O(log(n)) in the average case, and O(n) only in the worst case (when each element is different).
+ */
 public class UniqueNoInArray {
 
 	public void getUniqueNoInArrayUsingHashMap(int[] arr) {
